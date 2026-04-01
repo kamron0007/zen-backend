@@ -23,11 +23,18 @@ app.post("/api/chat", async (req, res) => {
 
     const data = await response.json();
 
-    res.json(data);
+    res.json({
+      success: true,
+      data: data
+    });
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Server running"));
+app.listen(PORT, () => console.log("Server running on " + PORT));
